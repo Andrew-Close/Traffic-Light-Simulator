@@ -10,6 +10,18 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/Topics/Lambda expressions/Expression closure" />
+            <option value="$PROJECT_DIR$/Topics/Lambda expressions/Higher-order functions" />
+            <option value="$PROJECT_DIR$/Topics/Lambda expressions/Max of two integers" />
+            <option value="$PROJECT_DIR$/Topics/Lambda expressions/Parts of code" />
+            <option value="$PROJECT_DIR$/Topics/Lambda expressions/Theory" />
+            <option value="$PROJECT_DIR$/Topics/Template method/A disadvantage" />
+            <option value="$PROJECT_DIR$/Topics/Template method/Career" />
+            <option value="$PROJECT_DIR$/Topics/Template method/Determine the output" />
+            <option value="$PROJECT_DIR$/Topics/Template method/Social networks" />
+            <option value="$PROJECT_DIR$/Topics/Template method/Template Method" />
+            <option value="$PROJECT_DIR$/Topics/Template method/Theory" />
+            <option value="$PROJECT_DIR$/Topics/Template method/What does it do" />
             <option value="$PROJECT_DIR$/Traffic Light Simulator with Java/task" />
             <option value="$PROJECT_DIR$/Traffic Light Simulator with Java/task/build/classes/java" />
             <option value="$PROJECT_DIR$/Traffic Light Simulator with Java/task/build/generated/sources/annotationProcessor/java" />

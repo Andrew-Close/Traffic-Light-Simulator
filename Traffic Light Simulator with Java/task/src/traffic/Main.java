@@ -1,27 +1,31 @@
 package traffic;
 
+import java.io.IOException;
+import java.util.Queue;
 import java.util.Scanner;
 
 public class Main {
-  static Scanner scanner = new Scanner(System.in);
+  private static final Scanner scanner = new Scanner(System.in);
+  private static final QueueThread queueThread = new QueueThread();
+  public static int numOfRoads;
+  public static int interval;
+  public static int state = 0;
 
   public static void main(String[] args) {
-    int numOfRoads;
-    int interval;
-
-
-
-
-    // Need to create a new function which only checks if it's an integer, cause right now you can only select 0-3 for the roads and interval.
-
-
-
-
     System.out.println("Welcome! You have just entered the traffic management system.");
     System.out.print("Input the number of roads: ");
-    numOfRoads = InputChecker.getValidInteger();
+    numOfRoads = InputGetter.getValidPositiveIntegerLoop();
     System.out.print("Input the interval: ");
-    interval = InputChecker.getValidInteger();
+    interval = InputGetter.getValidPositiveIntegerLoop();
+    try {
+      var clearCommand = System.getProperty("os.name").contains("Windows")
+              ? new ProcessBuilder("cmd", "/c", "cls")
+              : new ProcessBuilder("clear");
+      clearCommand.inheritIO().start().waitFor();
+    }
+    catch (IOException | InterruptedException ignored) {}
+    queueThread.setDaemon(true);
+    queueThread.start();
     selectionLoop();
   }
 
@@ -33,14 +37,38 @@ public class Main {
       System.out.println("2. Delete");
       System.out.println("3. System");
       System.out.println("0. Quit");
-      switch (scanner.nextInt()) {
-        case 0 -> {
-          System.out.println("Goodbye!");
-          break loop;
+      int choice = InputGetter.getValidMenuOption();
+      if (choice == -1) {
+        scanner.nextLine();
+        try {
+          var clearCommand = System.getProperty("os.name").contains("Windows")
+                  ? new ProcessBuilder("cmd", "/c", "cls")
+                  : new ProcessBuilder("clear");
+          clearCommand.inheritIO().start().waitFor();
         }
-        case 1 -> System.out.println("Road added");
-        case 2 -> System.out.println("Road deleted");
-        case 3 -> System.out.println("System opened");
+        catch (IOException | InterruptedException ignored) {}
+      } else {
+        switch (choice) {
+          case 0: {
+            System.out.println("Goodbye!");
+            queueThread.terminate();
+            break loop;
+          }
+          case 1:
+            System.out.println("Road added");
+            state = 1;
+            break;
+          case 2:
+            System.out.println("Road deleted");
+            state = 2;
+            break;
+          case 3:
+            System.out.println("System opened");
+            queueThread.printSystemInformation();
+            state = 3;
+        }
+        scanner.nextLine();
+        state = 0;
       }
     }
   }

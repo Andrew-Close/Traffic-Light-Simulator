@@ -803,6 +803,121 @@ files:
         }
       }
     learner_created: false
+  - name: src/traffic/Main$Choices.class
+    visible: true
+    learner_created: true
+  - name: src/traffic/InputGetter.java
+    visible: true
+    text: |
+      package traffic;
+      
+      import java.util.Scanner;
+      
+      public class InputGetter {
+          private enum Choices {
+              ZERO(0),ONE(1), TWO(2), THREE(3);
+              private final int choice;
+      
+              Choices(int choice) {
+                  this.choice = choice;
+              }
+          }
+      
+          private final static Scanner scanner = new Scanner(System.in);
+      
+          public static int getValidPositiveIntegerLoop() {
+              while (true) {
+                  String input = scanner.nextLine();
+                  int value;
+                  try {
+                      value = Integer.parseInt(input);
+                  } catch (Exception e) {
+                      System.out.println("Incorrect input. Please try again.");
+                      continue;
+                  }
+                  if (value > 0) {
+                      return value;
+                  } else {
+                      System.out.println("Incorrect input. Please try again.");
+                  }
+              }
+          }
+      
+          public static int getValidMenuOption() {
+              String input = scanner.nextLine();
+              int value;
+              try {
+                  value = Integer.parseInt(input);
+              } catch (Exception e) {
+                  System.out.println("Incorrect option. Please try again.");
+                  return -1;
+              }
+              for (Choices choice : Choices.values()) {
+                  if (choice.choice == value) {
+                      return value;
+                  }
+              }
+              System.out.println("Incorrect option. Please try again.");
+              return -1;
+          }
+      }
+    learner_created: true
+  - name: src/traffic/Main.class
+    visible: true
+    learner_created: true
+  - name: src/traffic/QueueThread.java
+    visible: true
+    text: |
+      package traffic;
+      
+      import java.io.IOException;
+      
+      public class QueueThread extends Thread {
+          private int timer = 0;
+          private boolean shouldContinue = true;
+          public QueueThread() {
+              super();
+              this.setName("QueueThread");
+          }
+      
+          @Override
+          public void run() {
+              while (shouldContinue) {
+                  try {
+                      Thread.sleep(1000L);
+                  } catch (InterruptedException ignored) {}
+                  ++timer;
+                  if (Main.state == 3) {
+                      updateAndPrintSystemInformation();
+                  }
+              }
+          }
+      
+          private void updateAndPrintSystemInformation() {
+              try {
+                  var clearCommand = System.getProperty("os.name").contains("Windows")
+                          ? new ProcessBuilder("cmd", "/c", "cls")
+                          : new ProcessBuilder("clear");
+                  clearCommand.inheritIO().start().waitFor();
+              }
+              catch (IOException | InterruptedException ignored) {}
+              printSystemInformation();
+          }
+      
+          public void printSystemInformation() {
+              System.out.println("! " + timer + "s. have passed since system startup !");
+              System.out.println("Number of roads: " + Main.numOfRoads);
+              System.out.println("! Interval: " + Main.interval + " !");
+              System.out.println("! Press \"Enter\" to open menu !");
+          }
+      
+          public void terminate() { shouldContinue = false; }
+      
+          public int getTimer() {
+              return timer;
+          }
+      }
+    learner_created: true
 feedback_link: https://hyperskill.org/learn/step/22726#comment
 status: Unchecked
 record: -1

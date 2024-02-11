@@ -918,6 +918,15 @@ files:
           }
       }
     learner_created: true
+  - name: src/traffic/InputGetter$Choices.class
+    visible: true
+    learner_created: true
+  - name: src/traffic/InputGetter.class
+    visible: true
+    learner_created: true
+  - name: src/traffic/QueueThread.class
+    visible: true
+    learner_created: true
 feedback_link: https://hyperskill.org/learn/step/22726#comment
 status: Unchecked
 record: -1

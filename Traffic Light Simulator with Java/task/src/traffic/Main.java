@@ -1,7 +1,6 @@
 package traffic;
 
 import java.io.IOException;
-import java.util.Queue;
 import java.util.Scanner;
 
 public class Main {
@@ -38,6 +37,7 @@ public class Main {
       System.out.println("3. System");
       System.out.println("0. Quit");
       int choice = InputGetter.getValidMenuOption();
+      // This is if the inputted menu option is wrong. This is because it handles the loop and waiting for input here, not in InputGetter.java
       if (choice == -1) {
         scanner.nextLine();
         try {
@@ -69,6 +69,13 @@ public class Main {
         }
         scanner.nextLine();
         state = 0;
+        try {
+          var clearCommand = System.getProperty("os.name").contains("Windows")
+                  ? new ProcessBuilder("cmd", "/c", "cls")
+                  : new ProcessBuilder("clear");
+          clearCommand.inheritIO().start().waitFor();
+        }
+        catch (IOException | InterruptedException ignored) {}
       }
     }
   }

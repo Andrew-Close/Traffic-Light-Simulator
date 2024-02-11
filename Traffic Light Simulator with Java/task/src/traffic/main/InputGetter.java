@@ -1,4 +1,4 @@
-package traffic;
+package traffic.main;
 
 import java.util.Scanner;
 

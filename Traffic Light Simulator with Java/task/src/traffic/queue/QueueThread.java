@@ -1,26 +1,37 @@
-package traffic;
+package traffic.queue;
+
+import traffic.main.Main;
 
 import java.io.IOException;
 
 public class QueueThread extends Thread {
     private int timer = 0;
+    private RoadQueue queue;
     private boolean shouldContinue = true;
     public QueueThread() {
         super();
         this.setName("QueueThread");
     }
 
+    public void initQueue() {
+        queue = new RoadQueue(Main.numOfRoads);
+    }
+
     @Override
     public void run() {
         while (shouldContinue) {
             try {
-                Thread.sleep(1000L);
+                waitOneSecond();
             } catch (InterruptedException ignored) {}
             ++timer;
             if (Main.state == 3) {
                 updateAndPrintSystemInformation();
             }
         }
+    }
+
+    private void waitOneSecond() throws InterruptedException {
+        Thread.sleep(1000L);
     }
 
     private void updateAndPrintSystemInformation() {
@@ -43,7 +54,7 @@ public class QueueThread extends Thread {
 
     public void terminate() { shouldContinue = false; }
 
-    public int getTimer() {
-        return timer;
+    public RoadQueue getQueue() {
+        return queue;
     }
 }

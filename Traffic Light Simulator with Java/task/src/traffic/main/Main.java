@@ -1,4 +1,6 @@
-package traffic;
+package traffic.main;
+
+import traffic.queue.QueueThread;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -14,6 +16,7 @@ public class Main {
     System.out.println("Welcome! You have just entered the traffic management system.");
     System.out.print("Input the number of roads: ");
     numOfRoads = InputGetter.getValidPositiveIntegerLoop();
+    queueThread.initQueue();
     System.out.print("Input the interval: ");
     interval = InputGetter.getValidPositiveIntegerLoop();
     try {
@@ -55,11 +58,12 @@ public class Main {
             break loop;
           }
           case 1:
-            System.out.println("Road added");
+            System.out.print("Input road name: ");
+            queueThread.getQueue().enqueue(scanner.nextLine());
             state = 1;
             break;
           case 2:
-            System.out.println("Road deleted");
+            System.out.println(queueThread.getQueue().dequeue() + " deleted!");
             state = 2;
             break;
           case 3:

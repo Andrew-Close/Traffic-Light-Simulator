@@ -1,16 +1,5 @@
 type: edu
 files:
-  - name: src/traffic/Main.java
-    visible: true
-    text: |
-      package traffic;
-      
-      public class Main {
-        public static void main(String[] args){
-          System.out.println("Hello World!");
-        }
-      }
-    learner_created: false
   - name: test/GlobalTests.java
     visible: false
     text: |-
@@ -803,10 +792,60 @@ files:
         }
       }
     learner_created: false
-  - name: src/traffic/Main$Choices.class
+  - name: src/traffic/queue/QueueThread.java
     visible: true
+    text: |
+      package traffic;
+      
+      import java.io.IOException;
+      
+      public class QueueThread extends Thread {
+          private int timer = 0;
+          private boolean shouldContinue = true;
+          public QueueThread() {
+              super();
+              this.setName("QueueThread");
+          }
+      
+          @Override
+          public void run() {
+              while (shouldContinue) {
+                  try {
+                      Thread.sleep(1000L);
+                  } catch (InterruptedException ignored) {}
+                  ++timer;
+                  if (Main.state == 3) {
+                      updateAndPrintSystemInformation();
+                  }
+              }
+          }
+      
+          private void updateAndPrintSystemInformation() {
+              try {
+                  var clearCommand = System.getProperty("os.name").contains("Windows")
+                          ? new ProcessBuilder("cmd", "/c", "cls")
+                          : new ProcessBuilder("clear");
+                  clearCommand.inheritIO().start().waitFor();
+              }
+              catch (IOException | InterruptedException ignored) {}
+              printSystemInformation();
+          }
+      
+          public void printSystemInformation() {
+              System.out.println("! " + timer + "s. have passed since system startup !");
+              System.out.println("Number of roads: " + Main.numOfRoads);
+              System.out.println("! Interval: " + Main.interval + " !");
+              System.out.println("! Press \"Enter\" to open menu !");
+          }
+      
+          public void terminate() { shouldContinue = false; }
+      
+          public int getTimer() {
+              return timer;
+          }
+      }
     learner_created: true
-  - name: src/traffic/InputGetter.java
+  - name: src/traffic/main/InputGetter.java
     visible: true
     text: |
       package traffic;
@@ -862,71 +901,38 @@ files:
           }
       }
     learner_created: true
-  - name: src/traffic/Main.class
-    visible: true
-    learner_created: true
-  - name: src/traffic/QueueThread.java
+  - name: src/traffic/main/Main.java
     visible: true
     text: |
       package traffic;
       
-      import java.io.IOException;
-      
-      public class QueueThread extends Thread {
-          private int timer = 0;
-          private boolean shouldContinue = true;
-          public QueueThread() {
-              super();
-              this.setName("QueueThread");
-          }
-      
-          @Override
-          public void run() {
-              while (shouldContinue) {
-                  try {
-                      Thread.sleep(1000L);
-                  } catch (InterruptedException ignored) {}
-                  ++timer;
-                  if (Main.state == 3) {
-                      updateAndPrintSystemInformation();
-                  }
-              }
-          }
-      
-          private void updateAndPrintSystemInformation() {
-              try {
-                  var clearCommand = System.getProperty("os.name").contains("Windows")
-                          ? new ProcessBuilder("cmd", "/c", "cls")
-                          : new ProcessBuilder("clear");
-                  clearCommand.inheritIO().start().waitFor();
-              }
-              catch (IOException | InterruptedException ignored) {}
-              printSystemInformation();
-          }
-      
-          public void printSystemInformation() {
-              System.out.println("! " + timer + "s. have passed since system startup !");
-              System.out.println("Number of roads: " + Main.numOfRoads);
-              System.out.println("! Interval: " + Main.interval + " !");
-              System.out.println("! Press \"Enter\" to open menu !");
-          }
-      
-          public void terminate() { shouldContinue = false; }
-      
-          public int getTimer() {
-              return timer;
-          }
+      public class Main {
+        public static void main(String[] args){
+          System.out.println("Hello World!");
+        }
       }
-    learner_created: true
-  - name: src/traffic/InputGetter$Choices.class
+    learner_created: false
+  - name: src/traffic/main/classFiles/InputGetter$Choices.class
     visible: true
     learner_created: true
-  - name: src/traffic/InputGetter.class
+  - name: src/traffic/main/classFiles/InputGetter.class
     visible: true
     learner_created: true
-  - name: src/traffic/QueueThread.class
+  - name: src/traffic/main/classFiles/Main$Choices.class
+    visible: true
+    learner_created: true
+  - name: src/traffic/main/classFiles/Main.class
+    visible: true
+    learner_created: true
+  - name: src/traffic/queue/classFiles/QueueThread.class
+    visible: true
+    learner_created: true
+  - name: src/traffic/queue/RoadQueue.java
     visible: true
     learner_created: true
 feedback_link: https://hyperskill.org/learn/step/22726#comment
-status: Unchecked
-record: -1
+status: Failed
+feedback:
+  message: Execution failed
+  time: "Sun, 11 Feb 2024 18:41:24 UTC"
+record: 5

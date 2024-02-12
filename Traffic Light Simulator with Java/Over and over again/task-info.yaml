@@ -912,9 +912,6 @@ files:
         }
       }
     learner_created: false
-  - name: src/traffic/main/classFiles/InputGetter$Choices.class
-    visible: true
-    learner_created: true
   - name: src/traffic/main/classFiles/InputGetter.class
     visible: true
     learner_created: true
@@ -933,6 +930,6 @@ files:
 feedback_link: https://hyperskill.org/learn/step/22726#comment
 status: Failed
 feedback:
-  message: Execution failed
-  time: "Sun, 11 Feb 2024 18:41:24 UTC"
+  message: Compilation Failed
+  time: "Sun, 11 Feb 2024 23:57:32 UTC"
 record: 5

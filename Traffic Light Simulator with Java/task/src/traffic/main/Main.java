@@ -12,6 +12,18 @@ public class Main {
   public static int interval;
   public static int state = 0;
 
+
+
+
+
+
+  // Currently, the enqueue system for checking if the queue is full is broken and will say it's full when there's one more empty space.
+
+
+
+
+
+
   public static void main(String[] args) {
     System.out.println("Welcome! You have just entered the traffic management system.");
     System.out.print("Input the number of roads: ");
@@ -63,7 +75,7 @@ public class Main {
             state = 1;
             break;
           case 2:
-            System.out.println(queueThread.getQueue().dequeue() + " deleted!");
+            queueThread.getQueue().dequeue();
             state = 2;
             break;
           case 3:

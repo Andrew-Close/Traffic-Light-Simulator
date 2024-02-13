@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="GlobalTests" tests="1" skipped="0" failures="1" errors="0" timestamp="2024-02-11T18:41:11" hostname="CFAMILYGAMINGPC" time="12.637">
+<testsuite name="GlobalTests" tests="1" skipped="0" failures="1" errors="0" timestamp="2024-02-12T02:48:45" hostname="CFAMILYGAMINGPC" time="12.65">
   <properties/>
-  <testcase name="start" classname="GlobalTests" time="12.637">
-    <failure message="java.lang.AssertionError: Wrong answer in test #9&#10;&#10;When the user selected '2' as an option, while queue is empty, program should print exactly 1 line, that contains &quot;queue is empty&quot; substring.&#10;&#10;Please find below the output of your program during this failed test.&#10;Note that the '&gt;' character indicates the beginning of the input line.&#10;&#10;---&#10;&#10;Welcome! You have just entered the traffic management system.&#10;Input the number of roads: &gt; 1&#10;Input the interval: &gt; 1&#10;Menu:&#10;1. Add&#10;2. Delete&#10;3. System&#10;0. Quit&#10;&gt; 2&#10;Road deleted" type="java.lang.AssertionError">java.lang.AssertionError: Wrong answer in test #9
+  <testcase name="start" classname="GlobalTests" time="12.65">
+    <failure message="java.lang.AssertionError: Wrong answer in test #9&#10;&#10;When the user selected '1' as an option and successfully added new road, program should print exactly 1 line, that contains road's name and &quot;add&quot; substrings.&#10;&#10;Please find below the output of your program during this failed test.&#10;Note that the '&gt;' character indicates the beginning of the input line.&#10;&#10;---&#10;&#10;Welcome! You have just entered the traffic management system.&#10;Input the number of roads: &gt; 1&#10;Input the interval: &gt; 1&#10;Menu:&#10;1. Add&#10;2. Delete&#10;3. System&#10;0. Quit&#10;&gt; 2&#10;Queue is empty!&#10;&gt; &#10;Menu:&#10;1. Add&#10;2. Delete&#10;3. System&#10;0. Quit&#10;&gt; 1&#10;Input road name: &gt; n3w_v3ry_unu5u4l_r04d_n4m3_1&#10;Queue is full!" type="java.lang.AssertionError">java.lang.AssertionError: Wrong answer in test #9
 
-When the user selected '2' as an option, while queue is empty, program should print exactly 1 line, that contains &quot;queue is empty&quot; substring.
+When the user selected '1' as an option and successfully added new road, program should print exactly 1 line, that contains road's name and &quot;add&quot; substrings.
 
 Please find below the output of your program during this failed test.
 Note that the '&gt;' character indicates the beginning of the input line.
@@ -20,7 +20,16 @@ Menu:
 3. System
 0. Quit
 &gt; 2
-Road deleted
+Queue is empty!
+&gt; 
+Menu:
+1. Add
+2. Delete
+3. System
+0. Quit
+&gt; 1
+Input road name: &gt; n3w_v3ry_unu5u4l_r04d_n4m3_1
+Queue is full!
 	at org.junit.Assert.fail(Assert.java:89)
 	at org.hyperskill.hstest.stage.StageTest.start(StageTest.java:203)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
@@ -301,7 +310,16 @@ Menu:
 3. System
 0. Quit
 > 2
-Road deleted
+Queue is empty!
+> 
+Menu:
+1. Add
+2. Delete
+3. System
+0. Quit
+> 1
+Input road name: > n3w_v3ry_unu5u4l_r04d_n4m3_1
+Queue is full!
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

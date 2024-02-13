@@ -236,4 +236,13 @@ Goodbye!
 3. System
 	0. Quit
 > 2
-Road deleted
+Queue is empty!
+> 
+Menu:
+1. Add
+2. Delete
+3. System
+	0. Quit
+> 1
+0Input road name: > n3w_v3ry_unu5u4l_r04d_n4m3_1
+Queue is full!

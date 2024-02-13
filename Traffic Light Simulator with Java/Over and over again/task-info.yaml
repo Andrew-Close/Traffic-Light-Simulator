@@ -930,6 +930,6 @@ files:
 feedback_link: https://hyperskill.org/learn/step/22726#comment
 status: Failed
 feedback:
-  message: Compilation Failed
-  time: "Sun, 11 Feb 2024 23:57:32 UTC"
+  message: Execution failed
+  time: "Mon, 12 Feb 2024 02:48:58 UTC"
 record: 5

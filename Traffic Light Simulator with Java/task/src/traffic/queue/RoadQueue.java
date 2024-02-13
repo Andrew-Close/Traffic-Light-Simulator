@@ -1,5 +1,7 @@
 package traffic.queue;
 
+import java.util.Arrays;
+
 public class RoadQueue {
     private String[] queue;
     private int front = 0;
@@ -11,7 +13,7 @@ public class RoadQueue {
 
     public void enqueue(String road) {
         if (incrementRear()) {
-            queue[rear] = road;
+            queue[getPreviousIndex(rear)] = road;
             System.out.println(road + " added!");
         } else {
             System.out.println("Queue is full!");
@@ -20,8 +22,8 @@ public class RoadQueue {
 
     public void dequeue() {
         if (incrementFront()) {
-            String dequeued = queue[front];
-            queue[front] = null;
+            String dequeued = queue[getPreviousIndex(front)];
+            queue[getPreviousIndex(front)] = null;
             System.out.println(dequeued + " deleted!");
         } else {
             System.out.println("Queue is empty!");
@@ -29,7 +31,7 @@ public class RoadQueue {
     }
 
     private boolean incrementFront() {
-        if (front == rear) {
+        if (queue[front] == null) {
             return false;
         }
         ++front;
@@ -40,14 +42,21 @@ public class RoadQueue {
     }
 
     private boolean incrementRear() {
+        if (!(queue[rear] == null)) {
+            return false;
+        }
         ++rear;
         if (rear > queue.length - 1) {
             rear = 0;
         }
-        if (rear == front) {
-            --rear;
-            return false;
-        }
         return true;
+    }
+
+    private int getPreviousIndex(int i) {
+        --i;
+        if (i < 0) {
+            i = queue.length - 1;
+        }
+        return i;
     }
 }

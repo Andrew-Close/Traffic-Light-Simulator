@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">12.650s</div>
+<div class="counter">4.723s</div>
 <p>duration</p>
 </div>
 </td>
@@ -76,9 +76,9 @@
 <a name="start"></a>
 <h3 class="failures">start</h3>
 <span class="code">
-<pre>java.lang.AssertionError: Wrong answer in test #9
+<pre>java.lang.AssertionError: Wrong answer in test #7
 
-When the user selected '1' as an option and successfully added new road, program should print exactly 1 line, that contains road's name and &quot;add&quot; substrings.
+System information printed each second should contain exactly 4 non-empty lines, when no roads were added: one that shows amount of time since the start of the program, next two should show the provided initial settings and the last, that asks user to press Enter to show options, as in example
 
 Please find below the output of your program during this failed test.
 Note that the '&gt;' character indicates the beginning of the input line.
@@ -93,17 +93,32 @@ Menu:
 2. Delete
 3. System
 0. Quit
-&gt; 2
-Queue is empty!
-&gt; 
-Menu:
-1. Add
-2. Delete
-3. System
-0. Quit
-&gt; 1
-Input road name: &gt; n3w_v3ry_unu5u4l_r04d_n4m3_1
-Queue is full!
+&gt; 3
+System opened
+! 0s. have passed since system startup !
+Number of roads: 1
+! Interval: 1 !
+! Press &quot;Enter&quot; to open menu !
+
+! 1s. have passed since system startup !
+Number of roads: 1
+! Interval: 1 !
+! Press &quot;Enter&quot; to open menu !
+
+! 2s. have passed since system startup !
+Number of roads: 1
+! Interval: 1 !
+! Press &quot;Enter&quot; to open menu !
+
+! 3s. have passed since system startup !
+Number of roads: 1
+! Interval: 1 !
+! Press &quot;Enter&quot; to open menu !
+
+! 4s. have passed since system startup !
+Number of roads: 1
+! Interval: 1 !
+! Press &quot;Enter&quot; to open menu !
 	at org.junit.Assert.fail(Assert.java:89)
 	at org.hyperskill.hstest.stage.StageTest.start(StageTest.java:203)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
@@ -165,7 +180,7 @@ Queue is full!
 </thead>
 <tr>
 <td class="failures">start</td>
-<td class="failures">12.650s</td>
+<td class="failures">4.723s</td>
 <td class="failures">failed</td>
 </tr>
 </table>
@@ -299,123 +314,27 @@ System opened
 Number of roads: 1
 ! Interval: 1 !
 ! Press &quot;Enter&quot; to open menu !
+
 ! 1s. have passed since system startup !
 Number of roads: 1
 ! Interval: 1 !
 ! Press &quot;Enter&quot; to open menu !
+
 ! 2s. have passed since system startup !
 Number of roads: 1
 ! Interval: 1 !
 ! Press &quot;Enter&quot; to open menu !
+
 ! 3s. have passed since system startup !
 Number of roads: 1
 ! Interval: 1 !
 ! Press &quot;Enter&quot; to open menu !
+
 ! 4s. have passed since system startup !
 Number of roads: 1
 ! Interval: 1 !
 ! Press &quot;Enter&quot; to open menu !
-&gt; 
-Menu:
-1. Add
-2. Delete
-3. System
-0. Quit
-&gt; 3
-System opened
-! 4s. have passed since system startup !
-Number of roads: 1
-! Interval: 1 !
-! Press &quot;Enter&quot; to open menu !
-! 5s. have passed since system startup !
-Number of roads: 1
-! Interval: 1 !
-! Press &quot;Enter&quot; to open menu !
-&gt; 
-Menu:
-1. Add
-2. Delete
-3. System
-0. Quit
-&gt; 0
-Goodbye!
-?[1;31m
-Start test 8?[0m
-Welcome! You have just entered the traffic management system.
-Input the number of roads: &gt; 24367587
-Input the interval: &gt; 24367587
-Menu:
-1. Add
-2. Delete
-3. System
-0. Quit
-&gt; 3
-System opened
-! 0s. have passed since system startup !
-Number of roads: 24367587
-! Interval: 24367587 !
-! Press &quot;Enter&quot; to open menu !
-! 1s. have passed since system startup !
-Number of roads: 24367587
-! Interval: 24367587 !
-! Press &quot;Enter&quot; to open menu !
-! 2s. have passed since system startup !
-Number of roads: 24367587
-! Interval: 24367587 !
-! Press &quot;Enter&quot; to open menu !
-! 3s. have passed since system startup !
-Number of roads: 24367587
-! Interval: 24367587 !
-! Press &quot;Enter&quot; to open menu !
-! 4s. have passed since system startup !
-Number of roads: 24367587
-! Interval: 24367587 !
-! Press &quot;Enter&quot; to open menu !
-&gt; 
-Menu:
-1. Add
-2. Delete
-3. System
-0. Quit
-&gt; 3
-System opened
-! 4s. have passed since system startup !
-Number of roads: 24367587
-! Interval: 24367587 !
-! Press &quot;Enter&quot; to open menu !
-! 5s. have passed since system startup !
-Number of roads: 24367587
-! Interval: 24367587 !
-! Press &quot;Enter&quot; to open menu !
-&gt; 
-Menu:
-1. Add
-2. Delete
-3. System
-0. Quit
-&gt; 0
-Goodbye!
-?[1;31m
-Start test 9?[0m
-Welcome! You have just entered the traffic management system.
-Input the number of roads: &gt; 1
-Input the interval: &gt; 1
-Menu:
-1. Add
-2. Delete
-3. System
-0. Quit
-&gt; 2
-Queue is empty!
-&gt; 
-Menu:
-1. Add
-2. Delete
-3. System
-0. Quit
-&gt; 1
-Input road name: &gt; n3w_v3ry_unu5u4l_r04d_n4m3_1
-Queue is full!
+
 </pre>
 </span>
 </div>
@@ -427,7 +346,7 @@ Queue is full!
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="http://www.gradle.org">Gradle 7.6</a> at Feb 11, 2024, 9:48:58 PM</p>
+<a href="http://www.gradle.org">Gradle 7.6</a> at Feb 13, 2024, 5:21:29 PM</p>
 </div>
 </div>
 </body>

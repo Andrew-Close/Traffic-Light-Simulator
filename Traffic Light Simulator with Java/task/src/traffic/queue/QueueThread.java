@@ -50,6 +50,29 @@ public class QueueThread extends Thread {
         System.out.println("Number of roads: " + Main.numOfRoads);
         System.out.println("! Interval: " + Main.interval + " !");
         System.out.println("! Press \"Enter\" to open menu !");
+        printQueue();
+    }
+
+    private void printQueue() {
+        int index = this.queue.front;
+        int rear = this.queue.rear;
+        String[] queue = this.queue.queue;
+        boolean paddingLock = true;
+        do {
+            if (queue[index] == null) {
+                break;
+            } else {
+                if (paddingLock) {
+                    System.out.println();
+                    paddingLock = false;
+                }
+                System.out.println(queue[index]);
+                ++index;
+                if (index > queue.length - 1) {
+                    index = 0;
+                }
+            }
+        } while (!(index == rear || queue[index] == null));
     }
 
     public void terminate() { shouldContinue = false; }

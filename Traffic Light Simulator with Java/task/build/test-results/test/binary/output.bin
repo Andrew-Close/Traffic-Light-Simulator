@@ -127,122 +127,24 @@ Goodbye!
 Number of roads: 1
 ! Interval: 1 !
  ! Press "Enter" to open menu !
+
 *! 1s. have passed since system startup !
 Number of roads: 1
 ! Interval: 1 !
  ! Press "Enter" to open menu !
+
 *! 2s. have passed since system startup !
 Number of roads: 1
 ! Interval: 1 !
  ! Press "Enter" to open menu !
+
 *! 3s. have passed since system startup !
 Number of roads: 1
 ! Interval: 1 !
  ! Press "Enter" to open menu !
+
 *! 4s. have passed since system startup !
 Number of roads: 1
 ! Interval: 1 !
  ! Press "Enter" to open menu !
-> 
-Menu:
-1. Add
-2. Delete
-3. System
-	0. Quit
-> 3
-System opened
-*! 4s. have passed since system startup !
-Number of roads: 1
-! Interval: 1 !
- ! Press "Enter" to open menu !
-*! 5s. have passed since system startup !
-Number of roads: 1
-! Interval: 1 !
- ! Press "Enter" to open menu !
-> 
-Menu:
-1. Add
-2. Delete
-3. System
-	0. Quit
-> 0
-
-Goodbye!
-[1;31m
-Start test 8[0m
-?Welcome! You have just entered the traffic management system.
-&Input the number of roads: > 24367587
-Input the interval: > 24367587
-Menu:
-1. Add
-2. Delete
-3. System
-	0. Quit
-> 3
-System opened
-*! 0s. have passed since system startup !
-Number of roads: 24367587
-! Interval: 24367587 !
- ! Press "Enter" to open menu !
-*! 1s. have passed since system startup !
-Number of roads: 24367587
-! Interval: 24367587 !
- ! Press "Enter" to open menu !
-*! 2s. have passed since system startup !
-Number of roads: 24367587
-! Interval: 24367587 !
- ! Press "Enter" to open menu !
-*! 3s. have passed since system startup !
-Number of roads: 24367587
-! Interval: 24367587 !
- ! Press "Enter" to open menu !
-*! 4s. have passed since system startup !
-Number of roads: 24367587
-! Interval: 24367587 !
- ! Press "Enter" to open menu !
-> 
-Menu:
-1. Add
-2. Delete
-3. System
-	0. Quit
-> 3
-System opened
-*! 4s. have passed since system startup !
-Number of roads: 24367587
-! Interval: 24367587 !
- ! Press "Enter" to open menu !
-*! 5s. have passed since system startup !
-Number of roads: 24367587
-! Interval: 24367587 !
- ! Press "Enter" to open menu !
-> 
-Menu:
-1. Add
-2. Delete
-3. System
-	0. Quit
-> 0
-
-Goodbye!
-[1;31m
-Start test 9[0m
-?Welcome! You have just entered the traffic management system.
-Input the number of roads: > 1
-Input the interval: > 1
-Menu:
-1. Add
-2. Delete
-3. System
-	0. Quit
-> 2
-Queue is empty!
-> 
-Menu:
-1. Add
-2. Delete
-3. System
-	0. Quit
-> 1
-0Input road name: > n3w_v3ry_unu5u4l_r04d_n4m3_1
-Queue is full!
+

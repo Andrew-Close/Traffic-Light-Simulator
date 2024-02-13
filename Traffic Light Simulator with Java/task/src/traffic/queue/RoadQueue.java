@@ -1,11 +1,9 @@
 package traffic.queue;
 
-import java.util.Arrays;
-
 public class RoadQueue {
-    private String[] queue;
-    private int front = 0;
-    private int rear = 0;
+    String[] queue;
+    int front = 0;
+    int rear = 0;
 
     public RoadQueue(int size) {
         this.queue = new String[size];
@@ -30,6 +28,14 @@ public class RoadQueue {
         }
     }
 
+    int getPreviousIndex(int i) {
+        --i;
+        if (i < 0) {
+            i = queue.length - 1;
+        }
+        return i;
+    }
+
     private boolean incrementFront() {
         if (queue[front] == null) {
             return false;
@@ -50,13 +56,5 @@ public class RoadQueue {
             rear = 0;
         }
         return true;
-    }
-
-    private int getPreviousIndex(int i) {
-        --i;
-        if (i < 0) {
-            i = queue.length - 1;
-        }
-        return i;
     }
 }

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="GlobalTests" tests="1" skipped="0" failures="1" errors="0" timestamp="2024-02-12T02:48:45" hostname="CFAMILYGAMINGPC" time="12.65">
+<testsuite name="GlobalTests" tests="1" skipped="0" failures="1" errors="0" timestamp="2024-02-13T22:21:24" hostname="CFAMILYGAMINGPC" time="4.723">
   <properties/>
-  <testcase name="start" classname="GlobalTests" time="12.65">
-    <failure message="java.lang.AssertionError: Wrong answer in test #9&#10;&#10;When the user selected '1' as an option and successfully added new road, program should print exactly 1 line, that contains road's name and &quot;add&quot; substrings.&#10;&#10;Please find below the output of your program during this failed test.&#10;Note that the '&gt;' character indicates the beginning of the input line.&#10;&#10;---&#10;&#10;Welcome! You have just entered the traffic management system.&#10;Input the number of roads: &gt; 1&#10;Input the interval: &gt; 1&#10;Menu:&#10;1. Add&#10;2. Delete&#10;3. System&#10;0. Quit&#10;&gt; 2&#10;Queue is empty!&#10;&gt; &#10;Menu:&#10;1. Add&#10;2. Delete&#10;3. System&#10;0. Quit&#10;&gt; 1&#10;Input road name: &gt; n3w_v3ry_unu5u4l_r04d_n4m3_1&#10;Queue is full!" type="java.lang.AssertionError">java.lang.AssertionError: Wrong answer in test #9
+  <testcase name="start" classname="GlobalTests" time="4.723">
+    <failure message="java.lang.AssertionError: Wrong answer in test #7&#10;&#10;System information printed each second should contain exactly 4 non-empty lines, when no roads were added: one that shows amount of time since the start of the program, next two should show the provided initial settings and the last, that asks user to press Enter to show options, as in example&#10;&#10;Please find below the output of your program during this failed test.&#10;Note that the '&gt;' character indicates the beginning of the input line.&#10;&#10;---&#10;&#10;Welcome! You have just entered the traffic management system.&#10;Input the number of roads: &gt; 1&#10;Input the interval: &gt; 1&#10;Menu:&#10;1. Add&#10;2. Delete&#10;3. System&#10;0. Quit&#10;&gt; 3&#10;System opened&#10;! 0s. have passed since system startup !&#10;Number of roads: 1&#10;! Interval: 1 !&#10;! Press &quot;Enter&quot; to open menu !&#10;&#10;! 1s. have passed since system startup !&#10;Number of roads: 1&#10;! Interval: 1 !&#10;! Press &quot;Enter&quot; to open menu !&#10;&#10;! 2s. have passed since system startup !&#10;Number of roads: 1&#10;! Interval: 1 !&#10;! Press &quot;Enter&quot; to open menu !&#10;&#10;! 3s. have passed since system startup !&#10;Number of roads: 1&#10;! Interval: 1 !&#10;! Press &quot;Enter&quot; to open menu !&#10;&#10;! 4s. have passed since system startup !&#10;Number of roads: 1&#10;! Interval: 1 !&#10;! Press &quot;Enter&quot; to open menu !" type="java.lang.AssertionError">java.lang.AssertionError: Wrong answer in test #7
 
-When the user selected '1' as an option and successfully added new road, program should print exactly 1 line, that contains road's name and &quot;add&quot; substrings.
+System information printed each second should contain exactly 4 non-empty lines, when no roads were added: one that shows amount of time since the start of the program, next two should show the provided initial settings and the last, that asks user to press Enter to show options, as in example
 
 Please find below the output of your program during this failed test.
 Note that the '&gt;' character indicates the beginning of the input line.
@@ -19,17 +19,32 @@ Menu:
 2. Delete
 3. System
 0. Quit
-&gt; 2
-Queue is empty!
-&gt; 
-Menu:
-1. Add
-2. Delete
-3. System
-0. Quit
-&gt; 1
-Input road name: &gt; n3w_v3ry_unu5u4l_r04d_n4m3_1
-Queue is full!
+&gt; 3
+System opened
+! 0s. have passed since system startup !
+Number of roads: 1
+! Interval: 1 !
+! Press &quot;Enter&quot; to open menu !
+
+! 1s. have passed since system startup !
+Number of roads: 1
+! Interval: 1 !
+! Press &quot;Enter&quot; to open menu !
+
+! 2s. have passed since system startup !
+Number of roads: 1
+! Interval: 1 !
+! Press &quot;Enter&quot; to open menu !
+
+! 3s. have passed since system startup !
+Number of roads: 1
+! Interval: 1 !
+! Press &quot;Enter&quot; to open menu !
+
+! 4s. have passed since system startup !
+Number of roads: 1
+! Interval: 1 !
+! Press &quot;Enter&quot; to open menu !
 	at org.junit.Assert.fail(Assert.java:89)
 	at org.hyperskill.hstest.stage.StageTest.start(StageTest.java:203)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
@@ -203,123 +218,27 @@ System opened
 Number of roads: 1
 ! Interval: 1 !
 ! Press "Enter" to open menu !
+
 ! 1s. have passed since system startup !
 Number of roads: 1
 ! Interval: 1 !
 ! Press "Enter" to open menu !
+
 ! 2s. have passed since system startup !
 Number of roads: 1
 ! Interval: 1 !
 ! Press "Enter" to open menu !
+
 ! 3s. have passed since system startup !
 Number of roads: 1
 ! Interval: 1 !
 ! Press "Enter" to open menu !
+
 ! 4s. have passed since system startup !
 Number of roads: 1
 ! Interval: 1 !
 ! Press "Enter" to open menu !
-> 
-Menu:
-1. Add
-2. Delete
-3. System
-0. Quit
-> 3
-System opened
-! 4s. have passed since system startup !
-Number of roads: 1
-! Interval: 1 !
-! Press "Enter" to open menu !
-! 5s. have passed since system startup !
-Number of roads: 1
-! Interval: 1 !
-! Press "Enter" to open menu !
-> 
-Menu:
-1. Add
-2. Delete
-3. System
-0. Quit
-> 0
-Goodbye!
-?[1;31m
-Start test 8?[0m
-Welcome! You have just entered the traffic management system.
-Input the number of roads: > 24367587
-Input the interval: > 24367587
-Menu:
-1. Add
-2. Delete
-3. System
-0. Quit
-> 3
-System opened
-! 0s. have passed since system startup !
-Number of roads: 24367587
-! Interval: 24367587 !
-! Press "Enter" to open menu !
-! 1s. have passed since system startup !
-Number of roads: 24367587
-! Interval: 24367587 !
-! Press "Enter" to open menu !
-! 2s. have passed since system startup !
-Number of roads: 24367587
-! Interval: 24367587 !
-! Press "Enter" to open menu !
-! 3s. have passed since system startup !
-Number of roads: 24367587
-! Interval: 24367587 !
-! Press "Enter" to open menu !
-! 4s. have passed since system startup !
-Number of roads: 24367587
-! Interval: 24367587 !
-! Press "Enter" to open menu !
-> 
-Menu:
-1. Add
-2. Delete
-3. System
-0. Quit
-> 3
-System opened
-! 4s. have passed since system startup !
-Number of roads: 24367587
-! Interval: 24367587 !
-! Press "Enter" to open menu !
-! 5s. have passed since system startup !
-Number of roads: 24367587
-! Interval: 24367587 !
-! Press "Enter" to open menu !
-> 
-Menu:
-1. Add
-2. Delete
-3. System
-0. Quit
-> 0
-Goodbye!
-?[1;31m
-Start test 9?[0m
-Welcome! You have just entered the traffic management system.
-Input the number of roads: > 1
-Input the interval: > 1
-Menu:
-1. Add
-2. Delete
-3. System
-0. Quit
-> 2
-Queue is empty!
-> 
-Menu:
-1. Add
-2. Delete
-3. System
-0. Quit
-> 1
-Input road name: > n3w_v3ry_unu5u4l_r04d_n4m3_1
-Queue is full!
+
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

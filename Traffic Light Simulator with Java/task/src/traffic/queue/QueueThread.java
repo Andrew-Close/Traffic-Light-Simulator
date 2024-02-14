@@ -49,22 +49,56 @@ public class QueueThread extends Thread {
         System.out.println("! " + timer + "s. have passed since system startup !");
         System.out.println("Number of roads: " + Main.numOfRoads);
         System.out.println("! Interval: " + Main.interval + " !");
-        System.out.println("! Press \"Enter\" to open menu !");
         printQueue();
+        System.out.println("! Press \"Enter\" to open menu !");
     }
 
     private void printQueue() {
         int index = this.queue.front;
         int rear = this.queue.rear;
         String[] queue = this.queue.queue;
-        boolean paddingLock = true;
-        do {
-            if (queue[index] == null) {
+        if (!(index == rear)) {
+            boolean shouldPrintPadding = false;
+            while (true) {
+                if ((queue[index] == null || index == rear)) {
+                    if (shouldPrintPadding) {
+                        System.out.println();
+                    }
+                    break;
+                } else {
+                    if (!shouldPrintPadding) {
+                        shouldPrintPadding = true;
+                        System.out.println();
+                    }
+                    System.out.println(queue[index]);
+                    ++index;
+                    if (index > queue.length - 1) {
+                        index = 0;
+                    }
+                }
+            }
+        } else if (!(queue[index] == null)) {
+            System.out.println();
+            for (int i = 0; i < queue.length; i++) {
+                System.out.println(queue[index]);
+                ++index;
+                if (index > queue.length - 1) {
+                    index = 0;
+                }
+            }
+            System.out.println();
+        }
+        /*
+        while (true) {
+            if ((queue[index] == null || index == rear)) {
+                if (shouldPrintPadding) {
+                    System.out.println();
+                }
                 break;
             } else {
-                if (paddingLock) {
+                if (!shouldPrintPadding) {
+                    shouldPrintPadding = true;
                     System.out.println();
-                    paddingLock = false;
                 }
                 System.out.println(queue[index]);
                 ++index;
@@ -72,7 +106,10 @@ public class QueueThread extends Thread {
                     index = 0;
                 }
             }
-        } while (!(index == rear || queue[index] == null));
+        }
+         */
+
+
     }
 
     public void terminate() { shouldContinue = false; }

@@ -928,8 +928,8 @@ files:
     visible: true
     learner_created: true
 feedback_link: https://hyperskill.org/learn/step/22726#comment
-status: Failed
+status: Solved
 feedback:
-  message: Execution failed
-  time: "Tue, 13 Feb 2024 22:21:29 UTC"
+  message: Congratulations!
+  time: "Wed, 14 Feb 2024 02:03:01 UTC"
 record: 5

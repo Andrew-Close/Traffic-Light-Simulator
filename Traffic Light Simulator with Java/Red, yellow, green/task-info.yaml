@@ -1,16 +1,5 @@
 type: edu
 files:
-  - name: src/traffic/Main.java
-    visible: true
-    text: |
-      package traffic;
-      
-      public class Main {
-        public static void main(String[] args){
-          System.out.println("Hello World!");
-        }
-      }
-    learner_created: false
   - name: test/GlobalTests.java
     visible: false
     text: |-
@@ -803,6 +792,367 @@ files:
         }
       }
     learner_created: false
+  - name: src/traffic/main/classFiles/Main.class
+    visible: true
+    learner_created: true
+  - name: src/traffic/queue/QueueThread.java
+    visible: true
+    text: |
+      package traffic.queue;
+      
+      import traffic.main.Main;
+      
+      import java.io.IOException;
+      
+      public class QueueThread extends Thread {
+          private int timer = 0;
+          private RoadQueue queue;
+          private boolean shouldContinue = true;
+          public QueueThread() {
+              super();
+              this.setName("QueueThread");
+          }
+      
+          public void initQueue() {
+              queue = new RoadQueue(Main.numOfRoads);
+          }
+      
+          @Override
+          public void run() {
+              while (shouldContinue) {
+                  try {
+                      waitOneSecond();
+                  } catch (InterruptedException ignored) {}
+                  ++timer;
+                  if (Main.state == 3) {
+                      updateAndPrintSystemInformation();
+                  }
+              }
+          }
+      
+          private void waitOneSecond() throws InterruptedException {
+              Thread.sleep(1000L);
+          }
+      
+          private void updateAndPrintSystemInformation() {
+              try {
+                  var clearCommand = System.getProperty("os.name").contains("Windows")
+                          ? new ProcessBuilder("cmd", "/c", "cls")
+                          : new ProcessBuilder("clear");
+                  clearCommand.inheritIO().start().waitFor();
+              }
+              catch (IOException | InterruptedException ignored) {}
+              printSystemInformation();
+          }
+      
+          public void printSystemInformation() {
+              System.out.println("! " + timer + "s. have passed since system startup !");
+              System.out.println("Number of roads: " + Main.numOfRoads);
+              System.out.println("! Interval: " + Main.interval + " !");
+              printQueue();
+              System.out.println("! Press \"Enter\" to open menu !");
+          }
+      
+          private void printQueue() {
+              int index = this.queue.front;
+              int rear = this.queue.rear;
+              String[] queue = this.queue.queue;
+              if (!(index == rear)) {
+                  boolean shouldPrintPadding = false;
+                  while (true) {
+                      if ((queue[index] == null || index == rear)) {
+                          if (shouldPrintPadding) {
+                              System.out.println();
+                          }
+                          break;
+                      } else {
+                          if (!shouldPrintPadding) {
+                              shouldPrintPadding = true;
+                              System.out.println();
+                          }
+                          System.out.println(queue[index]);
+                          ++index;
+                          if (index > queue.length - 1) {
+                              index = 0;
+                          }
+                      }
+                  }
+              } else if (!(queue[index] == null)) {
+                  System.out.println();
+                  for (int i = 0; i < queue.length; i++) {
+                      System.out.println(queue[index]);
+                      ++index;
+                      if (index > queue.length - 1) {
+                          index = 0;
+                      }
+                  }
+                  System.out.println();
+              }
+              /*
+              while (true) {
+                  if ((queue[index] == null || index == rear)) {
+                      if (shouldPrintPadding) {
+                          System.out.println();
+                      }
+                      break;
+                  } else {
+                      if (!shouldPrintPadding) {
+                          shouldPrintPadding = true;
+                          System.out.println();
+                      }
+                      System.out.println(queue[index]);
+                      ++index;
+                      if (index > queue.length - 1) {
+                          index = 0;
+                      }
+                  }
+              }
+               */
+      
+      
+          }
+      
+          public void terminate() { shouldContinue = false; }
+      
+          public RoadQueue getQueue() {
+              return queue;
+          }
+      }
+    learner_created: true
+  - name: src/traffic/queue/classFiles/QueueThread.class
+    visible: true
+    learner_created: true
+  - name: src/traffic/queue/RoadQueue.java
+    visible: true
+    text: |
+      package traffic.queue;
+      
+      public class RoadQueue {
+          String[] queue;
+          int front = 0;
+          int rear = 0;
+      
+          public RoadQueue(int size) {
+              this.queue = new String[size];
+          }
+      
+          public void enqueue(String road) {
+              if (incrementRear()) {
+                  queue[getPreviousIndex(rear)] = road;
+                  System.out.println(road + " added!");
+              } else {
+                  System.out.println("Queue is full!");
+              }
+          }
+      
+          public void dequeue() {
+              if (incrementFront()) {
+                  String dequeued = queue[getPreviousIndex(front)];
+                  queue[getPreviousIndex(front)] = null;
+                  System.out.println(dequeued + " deleted!");
+              } else {
+                  System.out.println("Queue is empty!");
+              }
+          }
+      
+          int getPreviousIndex(int i) {
+              --i;
+              if (i < 0) {
+                  i = queue.length - 1;
+              }
+              return i;
+          }
+      
+          private boolean incrementFront() {
+              if (queue[front] == null) {
+                  return false;
+              }
+              ++front;
+              if (front > queue.length - 1) {
+                  front = 0;
+              }
+              return true;
+          }
+      
+          private boolean incrementRear() {
+              if (!(queue[rear] == null)) {
+                  return false;
+              }
+              ++rear;
+              if (rear > queue.length - 1) {
+                  rear = 0;
+              }
+              return true;
+          }
+      }
+    learner_created: true
+  - name: src/traffic/main/Main.java
+    visible: true
+    text: |
+      package traffic.main;
+      
+      import traffic.queue.QueueThread;
+      
+      import java.io.IOException;
+      import java.util.Scanner;
+      
+      public class Main {
+        private static final Scanner scanner = new Scanner(System.in);
+        private static final QueueThread queueThread = new QueueThread();
+        public static int numOfRoads;
+        public static int interval;
+        public static int state = 0;
+      
+      
+      
+      
+      
+      
+        // Currently, the enqueue system for checking if the queue is full is broken and will say it's full when there's one more empty space.
+      
+      
+      
+      
+      
+      
+        public static void main(String[] args) {
+          System.out.println("Welcome! You have just entered the traffic management system.");
+          System.out.print("Input the number of roads: ");
+          numOfRoads = InputGetter.getValidPositiveIntegerLoop();
+          queueThread.initQueue();
+          System.out.print("Input the interval: ");
+          interval = InputGetter.getValidPositiveIntegerLoop();
+          try {
+            var clearCommand = System.getProperty("os.name").contains("Windows")
+                    ? new ProcessBuilder("cmd", "/c", "cls")
+                    : new ProcessBuilder("clear");
+            clearCommand.inheritIO().start().waitFor();
+          }
+          catch (IOException | InterruptedException ignored) {}
+          queueThread.setDaemon(true);
+          queueThread.start();
+          selectionLoop();
+        }
+      
+        public static void selectionLoop() {
+          loop:
+          while (true) {
+            System.out.println("Menu:");
+            System.out.println("1. Add");
+            System.out.println("2. Delete");
+            System.out.println("3. System");
+            System.out.println("0. Quit");
+            int choice = InputGetter.getValidMenuOption();
+            // This is if the inputted menu option is wrong. This is because it handles the loop and waiting for input here, not in InputGetter.java
+            if (choice == -1) {
+              scanner.nextLine();
+              try {
+                var clearCommand = System.getProperty("os.name").contains("Windows")
+                        ? new ProcessBuilder("cmd", "/c", "cls")
+                        : new ProcessBuilder("clear");
+                clearCommand.inheritIO().start().waitFor();
+              }
+              catch (IOException | InterruptedException ignored) {}
+            } else {
+              switch (choice) {
+                case 0: {
+                  System.out.println("Goodbye!");
+                  queueThread.terminate();
+                  break loop;
+                }
+                case 1:
+                  System.out.print("Input road name: ");
+                  queueThread.getQueue().enqueue(scanner.nextLine());
+                  state = 1;
+                  break;
+                case 2:
+                  queueThread.getQueue().dequeue();
+                  state = 2;
+                  break;
+                case 3:
+                  System.out.println("System opened");
+                  queueThread.printSystemInformation();
+                  state = 3;
+              }
+              scanner.nextLine();
+              state = 0;
+              try {
+                var clearCommand = System.getProperty("os.name").contains("Windows")
+                        ? new ProcessBuilder("cmd", "/c", "cls")
+                        : new ProcessBuilder("clear");
+                clearCommand.inheritIO().start().waitFor();
+              }
+              catch (IOException | InterruptedException ignored) {}
+            }
+          }
+        }
+      }
+    learner_created: true
+  - name: src/traffic/main/InputGetter.java
+    visible: true
+    text: |
+      package traffic.main;
+      
+      import java.util.Scanner;
+      
+      public class InputGetter {
+          private enum Choices {
+              ZERO(0),ONE(1), TWO(2), THREE(3);
+              private final int choice;
+      
+              Choices(int choice) {
+                  this.choice = choice;
+              }
+          }
+      
+          private final static Scanner scanner = new Scanner(System.in);
+      
+          public static int getValidPositiveIntegerLoop() {
+              while (true) {
+                  String input = scanner.nextLine();
+                  int value;
+                  try {
+                      value = Integer.parseInt(input);
+                  } catch (Exception e) {
+                      System.out.println("Incorrect input. Please try again.");
+                      continue;
+                  }
+                  if (value > 0) {
+                      return value;
+                  } else {
+                      System.out.println("Incorrect input. Please try again.");
+                  }
+              }
+          }
+      
+          public static int getValidMenuOption() {
+              String input = scanner.nextLine();
+              int value;
+              try {
+                  value = Integer.parseInt(input);
+              } catch (Exception e) {
+                  System.out.println("Incorrect option. Please try again.");
+                  return -1;
+              }
+              for (Choices choice : Choices.values()) {
+                  if (choice.choice == value) {
+                      return value;
+                  }
+              }
+              System.out.println("Incorrect option. Please try again.");
+              return -1;
+          }
+      }
+    learner_created: true
+  - name: src/traffic/main/classFiles/InputGetter.class
+    visible: true
+    learner_created: true
+  - name: src/traffic/main/classFiles/Main$Choices.class
+    visible: true
+    learner_created: true
+  - name: src/traffic/queue/Road.java
+    visible: true
+    learner_created: true
 feedback_link: https://hyperskill.org/learn/step/22727#comment
 status: Unchecked
 record: -1

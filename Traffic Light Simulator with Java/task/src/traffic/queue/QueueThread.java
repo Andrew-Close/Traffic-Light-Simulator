@@ -14,7 +14,7 @@ public class QueueThread extends Thread {
     }
 
     public void initQueue() {
-        queue = new RoadQueue(Main.numOfRoads);
+        queue = new RoadQueue(Main.getNumOfRoads());
     }
 
     @Override
@@ -24,7 +24,7 @@ public class QueueThread extends Thread {
                 waitOneSecond();
             } catch (InterruptedException ignored) {}
             ++timer;
-            if (Main.state == 3) {
+            if (Main.getState() == 3) {
                 updateAndPrintSystemInformation();
             }
         }
@@ -47,16 +47,16 @@ public class QueueThread extends Thread {
 
     public void printSystemInformation() {
         System.out.println("! " + timer + "s. have passed since system startup !");
-        System.out.println("Number of roads: " + Main.numOfRoads);
-        System.out.println("! Interval: " + Main.interval + " !");
+        System.out.println("Number of roads: " + Main.getNumOfRoads());
+        System.out.println("! Interval: " + Main.getInterval() + " !");
         printQueue();
         System.out.println("! Press \"Enter\" to open menu !");
     }
 
     private void printQueue() {
-        int index = this.queue.front;
-        int rear = this.queue.rear;
-        String[] queue = this.queue.queue;
+        int index = this.queue.getFront();
+        int rear = this.queue.getRear();
+        String[] queue = this.queue.getQueue();
         if (!(index == rear)) {
             boolean shouldPrintPadding = false;
             while (true) {
@@ -88,28 +88,6 @@ public class QueueThread extends Thread {
             }
             System.out.println();
         }
-        /*
-        while (true) {
-            if ((queue[index] == null || index == rear)) {
-                if (shouldPrintPadding) {
-                    System.out.println();
-                }
-                break;
-            } else {
-                if (!shouldPrintPadding) {
-                    shouldPrintPadding = true;
-                    System.out.println();
-                }
-                System.out.println(queue[index]);
-                ++index;
-                if (index > queue.length - 1) {
-                    index = 0;
-                }
-            }
-        }
-         */
-
-
     }
 
     public void terminate() { shouldContinue = false; }

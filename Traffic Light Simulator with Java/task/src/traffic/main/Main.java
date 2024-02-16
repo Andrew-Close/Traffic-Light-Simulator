@@ -8,16 +8,18 @@ import java.util.Scanner;
 public class Main {
   private static final Scanner scanner = new Scanner(System.in);
   private static final QueueThread queueThread = new QueueThread();
-  public static int numOfRoads;
-  public static int interval;
-  public static int state = 0;
+  private static int numOfRoads;
+  private static int interval;
+  private static int state = 0;
 
 
 
 
 
 
-  // Currently, the enqueue system for checking if the queue is full is broken and will say it's full when there's one more empty space.
+  // My idea for stage 6 is to add road objects to the queue instead of just string which tracks its own timer until it changes states.
+  // The queue thread will have a method which, when it finishes waiting one second, will tell all the roads to change its timer.
+  // When any of the road objects' timers reach 0, it will tell all the other roads to update their timers as well as it's own.
 
 
 
@@ -94,5 +96,21 @@ public class Main {
         catch (IOException | InterruptedException ignored) {}
       }
     }
+  }
+
+  public static QueueThread getQueueThread() {
+    return queueThread;
+  }
+
+  public static int getNumOfRoads() {
+    return numOfRoads;
+  }
+
+  public static int getInterval() {
+    return interval;
+  }
+
+  public static int getState() {
+    return state;
   }
 }

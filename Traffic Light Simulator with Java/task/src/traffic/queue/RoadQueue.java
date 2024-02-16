@@ -1,9 +1,9 @@
 package traffic.queue;
 
 public class RoadQueue {
-    String[] queue;
-    int front = 0;
-    int rear = 0;
+    private String[] queue;
+    private int front = 0;
+    private int rear = 0;
 
     public RoadQueue(int size) {
         this.queue = new String[size];
@@ -56,5 +56,17 @@ public class RoadQueue {
             rear = 0;
         }
         return true;
+    }
+
+    public String[] getQueue() {
+        return queue;
+    }
+
+    public int getFront() {
+        return front;
+    }
+
+    public int getRear() {
+        return rear;
     }
 }

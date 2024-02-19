@@ -1154,5 +1154,8 @@ files:
     visible: true
     learner_created: true
 feedback_link: https://hyperskill.org/learn/step/22727#comment
-status: Unchecked
+status: Failed
+feedback:
+  message: Compilation Failed
+  time: "Mon, 19 Feb 2024 22:05:46 UTC"
 record: -1

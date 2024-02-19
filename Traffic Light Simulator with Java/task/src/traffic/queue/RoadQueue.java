@@ -1,18 +1,26 @@
 package traffic.queue;
 
+import traffic.main.Main;
+
 public class RoadQueue {
-    private String[] queue;
+    private Road[] queue;
     private int front = 0;
     private int rear = 0;
+    private int openRoadIndex = -1;
 
     public RoadQueue(int size) {
-        this.queue = new String[size];
+        this.queue = new Road[size];
     }
 
-    public void enqueue(String road) {
+    public void enqueue(String name) {
         if (incrementRear()) {
-            queue[getPreviousIndex(rear)] = road;
-            System.out.println(road + " added!");
+            if (isEmpty()) {
+                openRoadIndex = getPreviousIndex(rear);
+                queue[getPreviousIndex(rear)] = new Road(name, Main.getInterval(), true);
+            } else {
+                queue[getPreviousIndex(rear)] = road;
+            }
+            System.out.println(name + " added!");
         } else {
             System.out.println("Queue is full!");
         }
@@ -20,7 +28,7 @@ public class RoadQueue {
 
     public void dequeue() {
         if (incrementFront()) {
-            String dequeued = queue[getPreviousIndex(front)];
+            Road dequeued = queue[getPreviousIndex(front)];
             queue[getPreviousIndex(front)] = null;
             System.out.println(dequeued + " deleted!");
         } else {
@@ -28,12 +36,24 @@ public class RoadQueue {
         }
     }
 
-    int getPreviousIndex(int i) {
+    private int getPreviousIndex(int i) {
         --i;
         if (i < 0) {
             i = queue.length - 1;
         }
         return i;
+    }
+
+    private int getNextIndex(int i) {
+        ++i;
+        if (i > 0) {
+            i = 0;
+        }
+        return i;
+    }
+
+    private int getDistanceFromOpenedIndex(int i) {
+
     }
 
     private boolean incrementFront() {
@@ -58,7 +78,53 @@ public class RoadQueue {
         return true;
     }
 
-    public String[] getQueue() {
+    void decrementTimers() {
+        for (Road road : queue) {
+            if (road != null) {
+                road.setTimeUntilSwitch(road.getTimeUntilSwitch() - 1);
+                if (road.getTimeUntilSwitch() == 0) {
+                    openRoadIndex = getNextIndex(openRoadIndex);
+
+                    break;
+                }
+            }
+        }
+    }
+
+    private void refreshTimers() {
+        for (int i = 0; i < queue.length; i++) {
+            Road road = queue[i];
+            if (road != null) {
+                int distance = getDistanceFromOpenedIndex(i);
+                if (distance == 0) {
+                    road.setTimeUntilSwitch(Main.getInterval());
+                } else {
+                    road.setTimeUntilSwitch(distance * Main.getInterval());
+                }
+            }
+        }
+    }
+
+    public boolean isEmpty() {
+        for (Road road : queue) {
+            if (road != null) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public int getNumOfElements() {
+        int counter  = 0;
+        for (Road road : queue) {
+            if (road != null) {
+                ++counter;
+            }
+        }
+        return counter;
+    }
+
+    public Road[] getQueue() {
         return queue;
     }
 

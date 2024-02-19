@@ -1,6 +1,7 @@
 package traffic.main;
 
 import traffic.queue.QueueThread;
+import traffic.queue.Road;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -19,7 +20,7 @@ public class Main {
 
   // My idea for stage 6 is to add road objects to the queue instead of just string which tracks its own timer until it changes states.
   // The queue thread will have a method which, when it finishes waiting one second, will tell all the roads to change its timer.
-  // When any of the road objects' timers reach 0, it will tell all the other roads to update their timers as well as it's own.
+  // When any of the road objects' timers reach 0, it will tell all the other roads to update their timers as well as its own.
 
 
 

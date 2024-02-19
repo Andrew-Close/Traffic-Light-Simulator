@@ -34,6 +34,15 @@ public class QueueThread extends Thread {
         Thread.sleep(1000L);
     }
 
+    private void waitOneSecondAndUpdateRoadTimers() throws InterruptedException {
+        waitOneSecond();
+        for (Road road : queue.getQueue()) {
+            if (road != null) {
+                road.setTimeUntilSwitch(road.getTimeUntilSwitch() - 1);
+            }
+        }
+    }
+
     private void updateAndPrintSystemInformation() {
         try {
             var clearCommand = System.getProperty("os.name").contains("Windows")

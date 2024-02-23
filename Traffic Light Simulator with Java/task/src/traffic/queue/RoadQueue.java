@@ -18,7 +18,7 @@ public class RoadQueue {
                 openRoadIndex = getPreviousIndex(rear);
                 queue[getPreviousIndex(rear)] = new Road(name, Main.getInterval(), true);
             } else {
-                queue[getPreviousIndex(rear)] = road;
+                queue[getPreviousIndex(rear)] = new Road(name, Main.getInterval() * getDistanceFromOpenedIndex(getPreviousIndex(rear)), false);
             }
             System.out.println(name + " added!");
         } else {
@@ -53,7 +53,11 @@ public class RoadQueue {
     }
 
     private int getDistanceFromOpenedIndex(int i) {
-
+        int length = getLargestOccupiedIndex() - getSmallestOccupiedIndex();
+        if (i < openRoadIndex) {
+            i += length;
+        }
+        return i - openRoadIndex;
     }
 
     private boolean incrementFront() {
@@ -76,6 +80,28 @@ public class RoadQueue {
             rear = 0;
         }
         return true;
+    }
+
+    private int getSmallestOccupiedIndex() {
+        int index = -1;
+        for (int i = 0; i < queue.length; i++) {
+            if (queue[i] != null) {
+                index = i;
+                break;
+            }
+        }
+        return index;
+    }
+
+    private int getLargestOccupiedIndex() {
+        int index = -1;
+        for (int i = queue.length - 1; i >= 0; i--) {
+            if (queue[i] != null) {
+                index = i;
+                break;
+            }
+        }
+        return index;
     }
 
     void decrementTimers() {
@@ -114,6 +140,7 @@ public class RoadQueue {
         return true;
     }
 
+    @Deprecated
     public int getNumOfElements() {
         int counter  = 0;
         for (Road road : queue) {

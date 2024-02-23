@@ -65,7 +65,7 @@ public class QueueThread extends Thread {
     private void printQueue() {
         int index = this.queue.getFront();
         int rear = this.queue.getRear();
-        String[] queue = this.queue.getQueue();
+        Road[] queue = this.queue.getQueue();
         if (!(index == rear)) {
             boolean shouldPrintPadding = false;
             while (true) {

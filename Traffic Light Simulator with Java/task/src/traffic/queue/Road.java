@@ -10,11 +10,23 @@ public class Road {
         this.isOpen = isOpen;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public int getTimeUntilSwitch() {
         return timeUntilSwitch;
     }
 
     public void setTimeUntilSwitch(int timeUntilSwitch) {
         this.timeUntilSwitch = timeUntilSwitch;
+    }
+
+    public boolean isOpen() {
+        return isOpen;
+    }
+
+    public void setOpen(boolean open) {
+        isOpen = open;
     }
 }

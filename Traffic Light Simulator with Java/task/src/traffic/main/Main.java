@@ -34,6 +34,7 @@ public class Main {
     queueThread.initQueue();
     System.out.print("Input the interval: ");
     interval = InputGetter.getValidPositiveIntegerLoop();
+    queueThread.setCycleCountdown();
     try {
       var clearCommand = System.getProperty("os.name").contains("Windows")
               ? new ProcessBuilder("cmd", "/c", "cls")

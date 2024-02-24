@@ -28,7 +28,7 @@ public class RoadQueue {
 
     public void dequeue() {
         if (incrementFront()) {
-            Road dequeued = queue[getPreviousIndex(front)];
+            String dequeued = queue[getPreviousIndex(front)].getName();
             queue[getPreviousIndex(front)] = null;
             System.out.println(dequeued + " deleted!");
         } else {
@@ -110,7 +110,7 @@ public class RoadQueue {
                 road.setTimeUntilSwitch(road.getTimeUntilSwitch() - 1);
                 if (road.getTimeUntilSwitch() == 0) {
                     openRoadIndex = getNextIndex(openRoadIndex);
-
+                    refreshTimers();
                     break;
                 }
             }
@@ -118,14 +118,26 @@ public class RoadQueue {
     }
 
     private void refreshTimers() {
-        for (int i = 0; i < queue.length; i++) {
-            Road road = queue[i];
-            if (road != null) {
-                int distance = getDistanceFromOpenedIndex(i);
-                if (distance == 0) {
+        if (getNumOfElements() == 1) {
+            for (int i = 0; i < queue.length; i++) {
+                Road road = queue[i];
+                if (road != null) {
                     road.setTimeUntilSwitch(Main.getInterval());
-                } else {
-                    road.setTimeUntilSwitch(distance * Main.getInterval());
+                }
+            }
+        } else {
+            for (int i = 0; i < queue.length; i++) {
+                Road road = queue[i];
+                if (road != null) {
+                    if (road.isOpen()) {
+                        road.setTimeUntilSwitch(Main.getInterval() * getNumOfElements() - 1);
+                        road.setOpen(false);
+                    } else if (i == openRoadIndex) {
+                        road.setTimeUntilSwitch(Main.getInterval());
+                        road.setOpen(true);
+                    } else {
+                        road.setTimeUntilSwitch(Main.getInterval() * getDistanceFromOpenedIndex(i));
+                    }
                 }
             }
         }
@@ -140,7 +152,6 @@ public class RoadQueue {
         return true;
     }
 
-    @Deprecated
     public int getNumOfElements() {
         int counter  = 0;
         for (Road road : queue) {

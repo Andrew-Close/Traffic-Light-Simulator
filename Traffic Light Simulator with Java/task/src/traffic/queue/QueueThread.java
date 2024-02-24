@@ -6,6 +6,7 @@ import java.io.IOException;
 
 public class QueueThread extends Thread {
     private int timer = 0;
+    private int cycleCountdown = -1;
     private RoadQueue queue;
     private boolean shouldContinue = true;
     public QueueThread() {
@@ -21,7 +22,9 @@ public class QueueThread extends Thread {
     public void run() {
         while (shouldContinue) {
             try {
-                waitOneSecond();
+                System.out.println(cycleCountdown);
+                waitOneSecondAndUpdateRoadTimers();
+                printQueue();
             } catch (InterruptedException ignored) {}
             ++timer;
             if (Main.getState() == 3) {
@@ -36,11 +39,7 @@ public class QueueThread extends Thread {
 
     private void waitOneSecondAndUpdateRoadTimers() throws InterruptedException {
         waitOneSecond();
-        for (Road road : queue.getQueue()) {
-            if (road != null) {
-                road.setTimeUntilSwitch(road.getTimeUntilSwitch() - 1);
-            }
-        }
+        getQueue().decrementTimers();
     }
 
     private void updateAndPrintSystemInformation() {
@@ -66,9 +65,12 @@ public class QueueThread extends Thread {
         int index = this.queue.getFront();
         int rear = this.queue.getRear();
         Road[] queue = this.queue.getQueue();
+
+        // If the front is not already on the rear. If it were then this branch would break.
         if (!(index == rear)) {
             boolean shouldPrintPadding = false;
             while (true) {
+                // Break condition
                 if ((queue[index] == null || index == rear)) {
                     if (shouldPrintPadding) {
                         System.out.println();
@@ -79,17 +81,18 @@ public class QueueThread extends Thread {
                         shouldPrintPadding = true;
                         System.out.println();
                     }
-                    System.out.println(queue[index]);
+                    System.out.println(queue[index].getName() + " " + queue[index].getTimeUntilSwitch() + " " + queue[index].isOpen());
                     ++index;
                     if (index > queue.length - 1) {
                         index = 0;
                     }
                 }
             }
+        // Checks if the queue is empty. If it is empty, then no padding should be printed
         } else if (!(queue[index] == null)) {
             System.out.println();
             for (int i = 0; i < queue.length; i++) {
-                System.out.println(queue[index]);
+                System.out.println(queue[index].getName() + " " + queue[index].getTimeUntilSwitch() + " " + queue[index].isOpen());
                 ++index;
                 if (index > queue.length - 1) {
                     index = 0;
@@ -103,5 +106,11 @@ public class QueueThread extends Thread {
 
     public RoadQueue getQueue() {
         return queue;
+    }
+
+    public void setCycleCountdown() {
+        if (cycleCountdown == -1) {
+            this.cycleCountdown = Main.getInterval();
+        }
     }
 }
